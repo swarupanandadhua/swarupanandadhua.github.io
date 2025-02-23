@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+        }
+        .sidebar {
+            width: 25%;
+            background: #4CAF50;
+            padding: 20px;
+            color: white;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            padding: 8px;
+            background: #388E3C;
+            border-radius: 5px;
+        }
+        .sidebar ul li a:hover {
+            background: #2E7D32;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            background: white;
+            margin: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            height: 90vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Book Index</h2>
+        <ul>
+            <li><a href="#chapter1" onclick="loadContent('chapter1')">Chapter 1</a></li>
+            <li><a href="#chapter2" onclick="loadContent('chapter2')">Chapter 2</a></li>
+            <li><a href="#chapter3" onclick="loadContent('chapter3')">Chapter 3</a></li>
+        </ul>
+    </div>
+    <div class="content" id="book-content">
+        <h2>Welcome to the Book</h2>
+        <p>Select a chapter from the left panel to start reading.</p>
+    </div>
+
+    <script>
+        function loadContent(chapter) {
+            const content = {
+                chapter1: "<h2>Chapter 1</h2><p>This is the content of Chapter 1.</p>",
+                chapter2: "<h2>Chapter 2</h2><p>This is the content of Chapter 2.</p>",
+                chapter3: "<h2>Chapter 3</h2><p>This is the content of Chapter 3.</p>",
+            };
+            document.getElementById('book-content').innerHTML = content[chapter] || "<h2>Chapter Not Found</h2>";
+        }
+    </script>
+</body>
+</html>
