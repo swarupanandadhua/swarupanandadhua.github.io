@@ -38,6 +38,13 @@
             cursor: pointer;
             padding: 10px;
             border-radius: 5px;
+            z-index: 1000;
+        }
+        .toggle-btn.show {
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            background: #4CAF50;
         }
         .content {
             flex-grow: 1;
@@ -58,12 +65,19 @@
             .sidebar.visible {
                 transform: translateX(0);
             }
+            .toggle-btn {
+                position: fixed;
+                left: 10px;
+                top: 10px;
+                background: #4CAF50;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="sidebar" id="sidebar">
-        <button class="toggle-btn" id="toggleBtn">❮</button>
+    <button class="toggle-btn show" id="toggleBtn">❯</button>
+    <div class="sidebar hidden" id="sidebar">
+        <button class="toggle-btn" id="closeBtn">❮</button>
         <h2>Book Index</h2>
         <ul>
             <li><a href="#chapter1" onclick="loadContent('chapter1')">Chapter 1</a></li>
@@ -79,18 +93,20 @@
     <script>
         const sidebar = document.getElementById('sidebar');
         const toggleBtn = document.getElementById('toggleBtn');
+        const closeBtn = document.getElementById('closeBtn');
         
-        function toggleSidebar() {
-            if (sidebar.classList.contains('hidden')) {
-                sidebar.classList.remove('hidden');
-                toggleBtn.innerHTML = '❮';
-            } else {
-                sidebar.classList.add('hidden');
-                toggleBtn.innerHTML = '❯';
-            }
+        function showSidebar() {
+            sidebar.classList.remove('hidden');
+            toggleBtn.style.display = 'none';
         }
 
-        toggleBtn.addEventListener('click', toggleSidebar);
+        function hideSidebar() {
+            sidebar.classList.add('hidden');
+            toggleBtn.style.display = 'block';
+        }
+
+        toggleBtn.addEventListener('click', showSidebar);
+        closeBtn.addEventListener('click', hideSidebar);
         
         function loadContent(chapter) {
             const content = {
@@ -101,8 +117,7 @@
             document.getElementById('book-content').innerHTML = content[chapter] || "<h2>Chapter Not Found</h2>";
             
             if (window.innerWidth <= 768) {
-                sidebar.classList.add('hidden');
-                toggleBtn.innerHTML = '❯';
+                hideSidebar();
             }
         }
     </script>
